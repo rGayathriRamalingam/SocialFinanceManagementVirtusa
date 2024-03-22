@@ -1,0 +1,39 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+    <li class="breadcrumb-item active">Flight</li>
+  </ol>
+</nav>
+<div class="card">
+  <div class="header">
+    <h2 class="title">Add Family Detail</h2>
+  </div>
+  <div class="content">
+    <div *ngIf="feedback.length" class="alert alert-{{feedback.type}}">{{ feedback.message }}</div>
+    <form *ngIf="family" #editForm="ngForm" (ngSubmit)="save()">
+
+      <div class="form-group">
+        <label for="id">Tenant Name</label>
+        <input type="number" [(ngModel)]="family.tenantName" id="tenantName" name="tenantName" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="from">Phone Number</label>
+        <input [(ngModel)]="family.phoneNumber" id="phoneNumber" name="phoneNumber" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="to">Email</label>
+        <input [(ngModel)]="family.email" id="email" name="email" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="date">Appartment Number</label>
+        <input type="date" [(ngModel)]="family.appartmentNumber" id="appartmentNumber" name="appartmentNumber" class="form-control">
+      </div>
+
+      <button type="submit" class="btn btn-primary" [disabled]="!editForm.form.valid">Save</button>
+      <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+    </form>
+  </div>
+</div>

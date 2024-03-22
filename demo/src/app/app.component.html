@@ -1,0 +1,13 @@
+<div class="wrapper">
+  <div class="sidebar" data-background-color="white" data-active-color="danger">
+    <div *ngIf="isLoginPage()"><sidebar-cmp></sidebar-cmp></div>
+  </div>
+  <div class="main-panel">
+    <div *ngIf="isLoginPage()"><navbar-cmp></navbar-cmp></div>
+    <div class="content">
+      <router-outlet></router-outlet>
+      <router-outlet name="aux"></router-outlet>
+    </div>
+  </div>
+</div>
+

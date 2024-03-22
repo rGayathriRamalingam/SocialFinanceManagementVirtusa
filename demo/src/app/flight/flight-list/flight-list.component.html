@@ -1,0 +1,57 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+    <li class="breadcrumb-item active">Families</li>
+  </ol>
+</nav>
+<div class="card">
+  <div class="header">
+    <h2 class="title">Family List</h2>
+  </div>
+  <div class="content">
+    <form #f="ngForm">
+
+      <div class="form-group">
+        <label for="from">From:</label>
+        <input [(ngModel)]="filter.from" id="from" name="from" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="to">To:</label>
+        <input [(ngModel)]="filter.to" id="to" name="to" class="form-control">
+      </div>
+
+      <button (click)="search()" [disabled]="!f?.valid" class="btn btn-primary">Search</button>
+      <a [routerLink]="['../flights', 'new' ]" class="btn btn-default ml-2">New</a>
+    </form>
+  </div>
+</div>
+<div class="card" *ngIf="flightList.length > 0">
+  <div *ngIf="feedback.length" class="alert alert-{{feedback.type}}">{{ feedback.message }}</div>
+  <div class="table-responsive">
+    <table class="table table-centered table-hover mt-2" id="datatable">
+      <thead>
+        <tr>
+          <th class="border-top-0" scope="col">Tenant Name</th>
+          <th class="border-top-0" scope="col">Phone Number</th>
+          <th class="border-top-0" scope="col">Email</th>
+          <th class="border-top-0" scope="col">Appartment Number</th>
+          <th class="border-top-0" scope="col" style="width:120px"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of flightList" [class.active]="item === selectedFlight">
+
+          <td>{{item.tenantName}}</td>
+          <td>{{item.phoneNumber}}</td>
+          <td>{{item.email}}</td>
+          <td>{{item.appartmentNumber}}</td>
+          <td style="white-space: nowrap">
+            <a [routerLink]="['../flights', item.tenantName ]" class="btn btn-secondary">Edit</a>&nbsp;
+            <button (click)="delete(item)" class="btn btn-danger">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
